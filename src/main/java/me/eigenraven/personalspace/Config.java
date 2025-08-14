@@ -28,6 +28,8 @@ public class Config {
         public static final boolean debugLogging = false;
 
         public static final boolean useBlockEventChecks = true;
+
+        public static final boolean staticLoadDimension = false;
     }
 
     private static class Categories {
@@ -40,7 +42,8 @@ public class Config {
     public static HashSet<String> allowedBiomes = new HashSet<>(Arrays.asList(Defaults.allowedBiomes));
     public static int firstDimensionId = Defaults.firstDimensionId;
     public static boolean debugLogging = Defaults.debugLogging;
-    public static boolean useBlockEventChecks = true;
+    public static boolean useBlockEventChecks = Defaults.useBlockEventChecks;
+    public static boolean staticLoadDimension = Defaults.staticLoadDimension;
 
     public static void synchronizeConfiguration(File configFile) {
         Configuration configuration = new Configuration(configFile);
@@ -85,6 +88,12 @@ public class Config {
                 Categories.general,
                 Defaults.useBlockEventChecks,
                 "Use fake Block break events to check for permissions, disable in case of broken event handlers");
+
+        staticLoadDimension = configuration.getBoolean(
+                "staticLoadDimension",
+                Categories.general,
+                Defaults.staticLoadDimension,
+                "Static Load Personal Dimensions. May cause lagging but may fix load error.");
 
         if (configuration.hasChanged()) {
             configuration.save();
