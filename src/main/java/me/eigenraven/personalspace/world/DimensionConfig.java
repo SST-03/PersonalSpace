@@ -321,7 +321,7 @@ public class DimensionConfig {
     @SuppressWarnings("unchecked")
     public void registerWithDimensionManager(int dimId, boolean isClient) {
         if (!DimensionManager.isDimensionRegistered(dimId)) {
-            DimensionManager.registerProviderType(dimId, PersonalWorldProvider.class, false);
+            DimensionManager.registerProviderType(dimId, PersonalWorldProvider.class, Config.staticLoadDimension);
             // Work around bad thermos logic
             if (PersonalSpaceMod.isInThermos()) {
                 try {
